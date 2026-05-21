@@ -6,6 +6,8 @@ app = Flask(__name__)
 app.secret_key = "splitwise"
 
 
+
+
 def get_db():
 
     connection = psycopg2.connect(
