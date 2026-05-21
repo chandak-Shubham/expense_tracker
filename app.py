@@ -115,6 +115,7 @@ def dashboard():
     f.user2_id=%s
     """,
 
+
     (
 
     session["user_id"],
