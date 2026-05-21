@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+
+<html>
+
+<body>
+
+<h1>Add Expense</h1>
+
+<form method="POST">
+
+Description
+
+<br>
+
+<input
+type="text"
+name="description"
+required>
+
+<br><br>
+
+Amount
+
+<br>
+
+<input
+type="number"
+name="amount"
+required>
+
+<br><br>
+
+Choose Friend
+
+<br>
+
+<select
+name="friend_email">
+
+{% for friend in friends %}
+
+<option
+value="{{friend}}">
+
+{{friend}}
+
+</option>
+
+{% endfor %}
+
+</select>
+
+<br><br>
+
+<button>
+
+Add Expense
+
+</button>
+
+</form>
+
+</body>
+
+</html>
