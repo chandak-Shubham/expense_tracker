@@ -70,7 +70,7 @@ def login():
         cursor = connection.cursor()
         cursor.execute(
         """
-        SELECT user_id, user_name FROM users
+        SELECT user_id FROM users
         WHERE user_email=%s
         AND user_password=%s
         """,
@@ -78,17 +78,12 @@ def login():
         )
 
         user = cursor.fetchone()
-
         cursor.close()
         connection.close()
 
         if user:
             session["user_id"]=user[0]
-            session["user_name"]=user[1]
-            return redirect(
-                url_for(
-                    "dashboard"
-                )
+            return redirect(url_for("dashboard")
             )
         return "Invalid Credentials"
     return render_template("login.html")
@@ -100,51 +95,22 @@ def dashboard():
     cursor=connection.cursor()
     cursor.execute(
     """
-    SELECT u.user_email FROM friends f
-    JOIN users u 
+    SELECT u.user_email 
+    FROM friends f JOIN users u 
     ON
     u.user_id=
     CASE
-    WHEN f.user1_id=%s
-    THEN f.user2_id
-    ELSE f.user1_id
+    WHEN f.user1_id=%s THEN f.user2_id ELSE f.user1_id
     END
-
-    WHERE
-
-    f.user1_id=%s
-    OR
-    f.user2_id=%s
+    WHERE f.user1_id=%s OR f.user2_id=%s
     """,
-
-
-
-
-    (
-
-    session["user_id"],
-
-    session["user_id"],
-
-    session["user_id"]
-
+    (session["user_id"], session["user_id"], session["user_id"])
     )
-
-    )
-
     friends=cursor.fetchall()
-
     cursor.close()
-
     connection.close()
 
-    return render_template(
-
-    "dashboard.html",
-
-    friends=friends
-
-    )
+    return render_template("dashboard.html",friends=friends)
 # ---------------- ADD FRIEND ----------------
 
 @app.route("/add_friend", methods=["GET", "POST"])
