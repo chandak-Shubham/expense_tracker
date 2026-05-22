@@ -17,26 +17,31 @@ href="/static/style.css">
 <div class="top">
 
 <h1>
+
 Splitwise Clone
+
 </h1>
 
 <div class="welcome">
 
-Hello,
-{{session["user_name"]}}
+Hello
 
 </div>
 
 </div>
+
 
 
 <div class="grid">
 
 
+
 <div class="card">
 
 <h2>
+
 Friends
+
 </h2>
 
 {% for friend in friends %}
@@ -53,10 +58,14 @@ Friends
 
 
 
+
+
 <div class="card">
 
 <h2>
+
 Quick Expense
+
 </h2>
 
 <form
@@ -68,18 +77,23 @@ name="description"
 placeholder="Description"
 required>
 
+<br><br>
+
 <input
 name="amount"
 type="number"
 placeholder="Amount"
 required>
 
+<br><br>
+
 <select
 name="friend_email">
 
 {% for friend in friends %}
 
-<option>
+<option
+value="{{friend[0]}}">
 
 {{friend[0]}}
 
@@ -88,6 +102,29 @@ name="friend_email">
 {% endfor %}
 
 </select>
+
+<br><br>
+
+<select
+name="split_type">
+
+<option
+value="equal">
+
+Split Equally
+
+</option>
+
+<option
+value="full">
+
+Friend Owes Full Amount
+
+</option>
+
+</select>
+
+<br><br>
 
 <button>
 
@@ -99,14 +136,20 @@ Add Expense
 
 </div>
 
+
+
 </div>
+
+
 
 
 
 <div class="card">
 
 <h2>
+
 Add Friend
+
 </h2>
 
 <form
@@ -117,6 +160,8 @@ method="POST">
 name="email"
 placeholder="Friend Email"
 required>
+
+<br><br>
 
 <button>
 
@@ -130,6 +175,8 @@ Add
 
 
 
+
+
 <div class="card">
 
 <a href="/balances">
@@ -139,6 +186,8 @@ View Balances →
 </a>
 
 </div>
+
+
 
 </div>
 

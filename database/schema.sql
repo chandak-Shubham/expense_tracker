@@ -15,7 +15,7 @@ CREATE TABLE friends(
     user2_id INTEGER NOT NULL,
     FOREIGN KEY (user1_id) REFERENCES users(user_id),
     FOREIGN KEY (user2_id) REFERENCES users(user_id),
-    CHECK (user1_id <> user2_id), --(1,5) AND (5,1) both can come in database and becoz of this if 1 adds 5 friend...it will work only unidirectionly not bidrectional
+    CHECK (user1_id <> user2_id), 
     UNIQUE (user1_id, user2_id)
 );
 
