@@ -14,135 +14,91 @@ href="/static/style.css">
 
 <div class="container">
 
-<div class="top">
+<!-- NAVBAR -->
+
+<div class="navbar">
 
 <h1>
-
-Splitwise Clone
-
+Splitwise
 </h1>
 
-<div class="welcome">
+<div>
 
-Hello
+Hello,
+{{session["user_name"]}}
 
 </div>
 
 </div>
 
 
+<!-- MAIN GRID -->
 
-<div class="grid">
+<div class="dashboard">
 
 
+<!-- LEFT -->
+
+<div class="left">
+
+
+
+<!-- FRIEND BALANCES -->
 
 <div class="card">
 
 <h2>
-
-Friends
-
+Balances
 </h2>
+
+{% if friends %}
 
 {% for friend in friends %}
 
-<div class="friend">
+<a
+class="friend-card"
+href="/history/{{friend[0]}}">
 
-👤 {{friend[0]}}
+<div>
+
+<div class="avatar">
+
+{{friend[0].split("@")[0][0].upper()}}
 
 </div>
+
+</div>
+
+
+<div>
+
+<div class="friend-name">
+
+{{friend[0].split("@")[0].capitalize()}}
+
+</div>
+
+
+<div class="friend-balance">
+
+View History →
+
+</div>
+
+</div>
+
+</a>
 
 {% endfor %}
 
-</div>
-
-
-
-
-
-<div class="card">
-
-<h2>
-
-Quick Expense
-
-</h2>
-
-<form
-action="/add_expense"
-method="POST">
-
-<input
-name="description"
-placeholder="Description"
-required>
-
-<br><br>
-
-<input
-name="amount"
-type="number"
-placeholder="Amount"
-required>
-
-<br><br>
-
-<select
-name="friend_email">
-
-{% for friend in friends %}
-
-<option
-value="{{friend[0]}}">
-
-{{friend[0]}}
-
-</option>
-
-{% endfor %}
-
-</select>
-
-<br><br>
-
-<select
-name="split_type">
-
-<option
-value="equal">
-
-Split Equally
-
-</option>
-
-<option
-value="full">
-
-Friend Owes Full Amount
-
-</option>
-
-</select>
-
-<br><br>
-
-<button>
-
-Add Expense
-
-</button>
-
-</form>
-
-</div>
-
-
+{% endif %}
 
 </div>
 
 
 
 
+<!-- ADD FRIEND -->
 
 <div class="card">
 
@@ -158,10 +114,7 @@ method="POST">
 
 <input
 name="email"
-placeholder="Friend Email"
-required>
-
-<br><br>
+placeholder="Enter Email">
 
 <button>
 
@@ -174,20 +127,88 @@ Add
 </div>
 
 
+</div>
 
 
+
+
+<!-- RIGHT -->
+
+
+<div class="right">
 
 <div class="card">
 
-<a href="/balances">
+<h2>
 
-View Balances →
+Add Expense
 
-</a>
+</h2>
+
+<form
+action="/add_expense"
+method="POST">
+
+<div class="expense-grid">
+
+<input
+name="description"
+placeholder="Dinner">
+
+<input
+name="amount"
+placeholder="₹500">
 
 </div>
 
 
+<select
+name="friend_email">
+
+{% for friend in friends %}
+
+<option>
+
+{{friend[0]}}
+
+</option>
+
+{% endfor %}
+
+</select>
+
+
+<select
+name="split_type">
+
+<option value="equal">
+
+Split Equally
+
+</option>
+
+<option value="full">
+
+Friend Pays Full
+
+</option>
+
+</select>
+
+
+<button>
+
+Add Expense
+
+</button>
+
+</form>
+
+</div>
+
+</div>
+
+</div>
 
 </div>
 

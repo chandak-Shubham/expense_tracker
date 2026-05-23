@@ -1,119 +1,34 @@
-/* ---------- LOGIN / SIGNUP ---------- */
+/* ---------- DASHBOARD ---------- */
 
 body{
+
 background:#f5f7fb;
+
 font-family:Arial;
+
 margin:0;
-}
 
-/* center page */
-.auth-page{
-
-height:100vh;
-
-display:flex;
-
-justify-content:center;
-
-align-items:center;
-
-}
-
-/* white card */
-.auth-card{
-
-background:white;
-
-width:420px;
-
-padding:50px;
-
-border-radius:20px;
-
-box-shadow:0 10px 30px rgba(0,0,0,.12);
-
-}
-
-/* heading */
-.auth-card h1{
-
-font-size:40px;
-
-margin-bottom:30px;
-
-text-align:center;
-
-}
-
-/* inputs */
-.auth-card input{
-
-width:100%;
-
-padding:14px;
-
-margin-bottom:18px;
-
-border:1px solid #ddd;
-
-border-radius:10px;
-
-box-sizing:border-box;
-
-font-size:16px;
-
-}
-
-/* button */
-.auth-card button{
-
-width:100%;
-
-padding:14px;
-
-background:#4f46e5;
-
-color:white;
-
-border:none;
-
-border-radius:10px;
-
-font-size:18px;
-
-cursor:pointer;
-
-}
-
-/* hover */
-.auth-card button:hover{
-
-background:#4338ca;
+color:#222;
 
 }
 
 
 
-
-body{
-
-background:#f5f7fb;
-
-font-family:Arial;
-
-padding:40px;
-
-}
-
+/* MAIN */
 
 .container{
 
-max-width:1000px;
+max-width:1350px;
 
 margin:auto;
 
+padding:35px;
+
 }
 
+
+
+/* TOP */
 
 .top{
 
@@ -121,46 +36,267 @@ display:flex;
 
 justify-content:space-between;
 
+align-items:center;
+
 margin-bottom:30px;
 
 }
 
 
-.grid{
+.top h1{
 
-display:grid;
+margin:0;
 
-grid-template-columns:1fr 1fr;
+font-size:38px;
 
-gap:20px;
+font-weight:700;
 
 }
 
+
+.welcome{
+
+background:white;
+
+padding:14px 20px;
+
+border-radius:16px;
+
+box-shadow:0 6px 20px rgba(0,0,0,.06);
+
+}
+
+
+
+
+
+/* DASHBOARD */
+
+.dashboard{
+
+display:grid;
+
+grid-template-columns:1.3fr .8fr;
+
+gap:25px;
+
+}
+
+
+.left{
+
+display:flex;
+
+flex-direction:column;
+
+gap:25px;
+
+}
+
+
+.right{
+
+display:flex;
+
+flex-direction:column;
+
+gap:25px;
+
+}
+
+
+
+
+
+/* CARD */
 
 .card{
 
 background:white;
 
-padding:25px;
+padding:30px;
 
-border-radius:18px;
+border-radius:24px;
 
-box-shadow:0 5px 20px rgba(0,0,0,.1);
+box-shadow:0 10px 35px rgba(0,0,0,.06);
+
+transition:.25s;
 
 }
 
 
-.friend{
+.card:hover{
 
-padding:12px;
+transform:translateY(-2px);
 
-margin:10px 0;
+}
 
-background:#eef3ff;
+
+.card h2{
+
+margin-top:0;
+
+margin-bottom:22px;
+
+font-size:28px;
+
+}
+
+
+
+
+
+/* FRIEND */
+
+.friend-card{
+
+display:flex;
+
+align-items:center;
+
+gap:18px;
+
+padding:16px;
+
+border-radius:16px;
+
+text-decoration:none;
+
+color:black;
+
+margin-bottom:12px;
+
+transition:.2s;
+
+}
+
+
+.friend-card:hover{
+
+background:#f5f2ff;
+
+}
+
+
+
+.avatar{
+
+width:54px;
+
+height:54px;
+
+border-radius:50%;
+
+background:#4f46e5;
+
+color:white;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+font-size:20px;
+
+font-weight:bold;
+
+flex-shrink:0;
+
+}
+
+
+
+.friend-name{
+
+font-size:17px;
+
+font-weight:700;
+
+margin-bottom:6px;
+
+}
+
+
+
+.friend-balance{
+
+font-size:14px;
+
+}
+
+
+
+
+
+/* BALANCE COLORS */
+
+.get{
+
+background:rgba(34,197,94,.12);
+
+color:#15803d;
+
+padding:7px 12px;
 
 border-radius:10px;
 
+display:inline-block;
+
+font-weight:600;
+
 }
+
+
+.owe{
+
+background:rgba(239,68,68,.12);
+
+color:#dc2626;
+
+padding:7px 12px;
+
+border-radius:10px;
+
+display:inline-block;
+
+font-weight:600;
+
+}
+
+
+.settled{
+
+background:rgba(120,120,120,.10);
+
+color:#666;
+
+padding:7px 12px;
+
+border-radius:10px;
+
+display:inline-block;
+
+font-weight:600;
+
+}
+
+
+
+
+
+/* FORMS */
+
+.expense-grid{
+
+display:grid;
+
+grid-template-columns:1fr 1fr;
+
+gap:14px;
+
+}
+
 
 
 input,
@@ -168,18 +304,47 @@ select{
 
 width:100%;
 
-padding:12px;
+padding:15px;
 
-margin:10px 0;
-
-border-radius:10px;
+margin-bottom:15px;
 
 border:1px solid #ddd;
+
+border-radius:14px;
+
+font-size:15px;
+
+box-sizing:border-box;
+
+background:white;
+
+transition:.2s;
 
 }
 
 
+input:focus,
+select:focus{
+
+outline:none;
+
+border-color:#4f46e5;
+
+box-shadow:0 0 0 4px rgba(79,70,229,.10);
+
+}
+
+
+
+
+
+/* BUTTON */
+
 button{
+
+width:100%;
+
+padding:15px;
 
 background:#4f46e5;
 
@@ -187,21 +352,108 @@ color:white;
 
 border:none;
 
-padding:12px;
+border-radius:14px;
 
-width:100%;
+font-size:16px;
 
-border-radius:10px;
+font-weight:600;
 
 cursor:pointer;
+
+transition:.2s;
 
 }
 
 
+button:hover{
+
+background:#4338ca;
+
+transform:translateY(-1px);
+
+}
+
+
+
+
+
+/* SCROLL */
+
+::-webkit-scrollbar{
+
+width:10px;
+
+}
+
+
+::-webkit-scrollbar-thumb{
+
+background:#d7d7e5;
+
+border-radius:20px;
+
+}
+
+
+
+
+
+/* LINKS */
+
 a{
 
-font-size:20px;
-
 text-decoration:none;
+
+color:inherit;
+
+}
+
+
+
+
+
+/* MOBILE */
+
+@media(max-width:900px){
+
+.container{
+
+padding:20px;
+
+}
+
+.dashboard{
+
+grid-template-columns:1fr;
+
+}
+
+.expense-grid{
+
+grid-template-columns:1fr;
+
+}
+
+.top{
+
+flex-direction:column;
+
+align-items:flex-start;
+
+gap:20px;
+
+}
+
+.card{
+
+padding:22px;
+
+}
+
+.top h1{
+
+font-size:30px;
+
+}
 
 }

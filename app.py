@@ -1,3 +1,5 @@
+from unicodedata import name
+
 from flask import Flask, render_template, request, session, redirect, url_for
 import psycopg2
 
@@ -53,7 +55,8 @@ def signup():
         connection.commit()
         cursor.close()
         connection.close()
-        return "Account Created"
+        
+        return redirect(url_for("dashboard"))
     
     return render_template("signup.html")
 
@@ -312,6 +315,174 @@ def balances():
             messages.append(f"Settled with {person}")
 
     return render_template("balances.html",messages=messages)
-    
+
+@app.route("/history/<friend_email>")
+def history(friend_email):
+
+    connection=get_db()
+
+    cursor=connection.cursor()
+
+
+    # GET FRIEND ID
+
+    cursor.execute(
+    """
+    SELECT user_id
+
+    FROM users
+
+    WHERE user_email=%s
+    """,
+
+    (
+        friend_email,
+    )
+
+    )
+
+    friend=cursor.fetchone()
+
+
+    if not friend:
+
+        cursor.close()
+
+        connection.close()
+
+        return "Friend not found"
+
+
+    friend_id=friend[0]
+
+
+
+    # GET ONLY HISTORY BETWEEN YOU AND FRIEND
+
+    cursor.execute(
+    """
+    SELECT
+
+    e.created_by,
+
+    creator.user_name,
+
+    ed.owed_amount,
+
+    e.description
+
+
+    FROM expenses e
+
+
+    JOIN expense_details ed
+
+    ON
+    e.expense_id=ed.expense_id
+
+
+    JOIN users creator
+
+    ON
+    creator.user_id=e.created_by
+
+
+    WHERE
+
+
+    (
+
+    e.created_by=%s
+
+    AND
+
+    ed.user_id=%s
+
+    )
+
+
+    OR
+
+
+    (
+
+    e.created_by=%s
+
+    AND
+
+    ed.user_id=%s
+
+    )
+
+
+    ORDER BY
+
+    e.expense_id DESC
+
+    """,
+
+    (
+
+    session["user_id"],
+    friend_id,
+
+    friend_id,
+    session["user_id"]
+
+    )
+
+    )
+
+
+    rows=cursor.fetchall()
+
+
+    cursor.close()
+
+    connection.close()
+
+
+
+    history=[]
+
+
+    for row in rows:
+
+        creator=row[0]
+
+        name=row[1]
+
+        amount=row[2]
+
+        desc=row[3]
+
+
+        if creator==session["user_id"]:
+
+            history.append(
+
+                f"{friend_email.split('@')[0]} owes you ₹{amount:.2f} ({desc})"
+
+            )
+
+
+        else:
+
+            history.append(
+
+                f"You owe {name} ₹{amount:.2f} ({desc})"
+
+            )
+
+
+
+    return render_template(
+
+        "history.html",
+
+        history=history
+
+    )
+
 if __name__ == "__main__":
     app.run(debug=True)

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<link
+rel="stylesheet"
+href="/static/style.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>
+
+History
+
+</h1>
+
+<a href="/dashboard">
+
+← Dashboard
+
+</a>
+
+<br><br>
+
+{% for row in history %}
+
+<div class="card">
+
+{% if "owes you" in row %}
+
+<span class="get">
+
+{{row}}
+
+</span>
+
+{% elif "You owe" in row %}
+
+<span class="owe">
+
+{{row}}
+
+</span>
+
+{% else %}
+
+<span class="settled">
+
+{{row}}
+
+</span>
+
+{% endif %}
+
+</div>
+
+<br>
+
+{% endfor %}
+
+</div>
+
+</body>
+
+</html>
